@@ -1,0 +1,26 @@
+{
+  "name": "quizwebsiteproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Riya0405/QuizWebsiteProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Riya0405/QuizWebsiteProject/issues"
+  },
+  "homepage": "https://github.com/Riya0405/QuizWebsiteProject#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "handlebars": "^4.7.7",
+    "mongoose": "^6.3.8",
+    "nodemon": "^2.0.16"
+  }
+}
