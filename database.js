@@ -4,20 +4,12 @@ var Schema = mongoose.Schema;
 
 var courseSchema = new Schema(
   {
-    coursename: String
+    coursename: String,
+    coursedescription: String
   }
 );
 
-var questionSchema = new Schema(
-    {
-        description: String,
-        option1: String,
-        option2: String,
-        option3: String,
-        option4: String,
-        answer: Number
-    }  
-);
+var courses = mongoose.model('coursesdb', courseSchema);
 
 var mongoDB = 'mongodb+srv://riyabajaj:riyabajaj@cluster0.ivoyaac.mongodb.net/quiz?retryWrites=true&w=majority';
 
@@ -28,4 +20,15 @@ function connect(){
     })
 }
 
-module.exports = {connect}
+function addcourse(course, callback){
+    var courseInstance = new courses({
+        coursename: course.name,
+        coursedescription: course.description
+    });
+    courseInstance.save(function(err){
+        if(err) throw err;
+        callback();
+    });
+}
+
+module.exports = {connect, addcourse}
