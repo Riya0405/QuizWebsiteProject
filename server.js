@@ -21,10 +21,50 @@ app.post('/courses', function(req,res){
     });
 })
 
-app.post('/questions', function(req,res){
-    console.log("trying to add question");
+app.patch('/courses', function(req,res){
+    console.log("trying to update course");
+    database.updatecourse(req.body, function(){
+        console.log('updated course');
+        res.sendStatus(200);
+    });
+})
+
+app.delete('/courses', function(req,res){
+    console.log("trying to delete course");
+    database.deletecourse(req.body, function(){
+        console.log('deleted course');
+        res.sendStatus(200);
+    });
+})
+
+app.get('/courses', function(req,res){
+    console.log("trying to get list of courses");
+    database.getallcourses(function(courses){
+        console.log('got list of courses');
+        res.send(courses);
+    });
+})
+
+app.post('/courses/questions', function(req,res){
+    console.log("trying to add question for a course");
     database.addquestion(req.body, function(){
-        console.log('added question');
+        console.log('added question for a course');
+        res.sendStatus(200);
+    });
+})
+
+app.patch('/courses/questions', function(req,res){
+    console.log("trying to update question for a course");
+    database.updatequestion(req.body, function(){
+        console.log('updated question for a course');
+        res.sendStatus(200);
+    });
+})
+
+app.delete('/courses/questions', function(req,res){
+    console.log("trying to delete question for a course");
+    database.deletequestion(req.body, function(){
+        console.log('deleted question for a course');
         res.sendStatus(200);
     });
 })
