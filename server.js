@@ -21,6 +21,14 @@ app.post('/courses', function(req,res){
     });
 })
 
+app.post('/questions', function(req,res){
+    console.log("trying to add question");
+    database.addquestion(req.body, function(){
+        console.log('added question');
+        res.sendStatus(200);
+    });
+})
+
 app.listen(7762,function(){
     console.log('server running on port 7762');
     database.connect();
