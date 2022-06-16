@@ -60,4 +60,14 @@ function addquestion(question, callback){
     });
 }
 
-module.exports = {connect, addcourse, addquestion}
+function getcoursequestions(requiredcourse, callback){
+    questions.
+    find().
+    where('coursename').equals(requiredcourse.coursename).
+    exec(function(err, result){
+        if(err) throw err;
+        callback(result);
+    });    
+}
+
+module.exports = {connect, addcourse, addquestion, getcoursequestions}

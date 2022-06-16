@@ -29,6 +29,14 @@ app.post('/questions', function(req,res){
     });
 })
 
+app.get('/courses/questions', function(req,res){
+    console.log("trying to get questions for a course");
+    database.getcoursequestions(req.body, function(questions){
+        console.log('got questions for the course');
+        res.send(questions);
+    });
+})
+
 app.listen(7762,function(){
     console.log('server running on port 7762');
     database.connect();
