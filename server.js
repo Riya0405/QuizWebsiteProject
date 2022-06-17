@@ -1,5 +1,7 @@
 const express=require('express');
 const bodyParser= require ('body-parser');
+
+const hbs=require('hbs');
 const app = express();
 
 const database = require('./database.js');
@@ -8,6 +10,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use('/',express.static('public'));
+
+app.set('view engine','hbs' );
+app.set('views','views');
 
 app.get('/', function(req,res){
     res.send("hello world");
@@ -76,6 +81,45 @@ app.get('/courses/questions', function(req,res){
         res.send(questions);
     });
 })
+
+app.get('/studentlandingpage', function(req,res,next){
+    console.log('in student landing page');
+    console.log("trying to get list of courses");
+    database.getallcourses(function(courses){
+        console.log('got list of courses');
+        res.render('studentlandingpage',{data:courses});
+    });
+})
+
+app.get('/teacherlandingpage', function(req,res,next){
+    console.log('in teacher landing page');
+    console.log("trying to get list of courses");
+    database.getallcourses(function(courses){
+        console.log('got list of courses');
+        res.render('teacherlandingpage',{data:courses});
+    });
+})
+
+app.get('/studenttakingquiz/:coursename', function(req,res,next){
+    console.log('in student taking quiz page');
+    console.log("trying to get questions for a course");
+    console.log(req.params.coursename);
+    database.getcoursequestions(req.params.coursename, function(questions){
+        console.log('got questions for the course');
+        res.render('showquiztostudent',{data:questions});
+    });
+})
+
+app.get('/teachereditingquiz/:coursename', function(req,res,next){
+    console.log('in teacher editing quiz page');
+    console.log("trying to get questions for a course");
+    console.log(req.params.coursename);
+    database.getcoursequestions(req.params.coursename, function(questions){
+        console.log('got questions for the course');
+        res.render('showquiztoteacher',{data:questions});
+    });
+})
+
 
 app.listen(7762,function(){
     console.log('server running on port 7762');

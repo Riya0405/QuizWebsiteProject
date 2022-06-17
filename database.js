@@ -101,9 +101,9 @@ function deletequestion(question, callback){
     })
 }
 
-function getcoursequestions(requiredcourse, callback){
+function getcoursequestions(coursename, callback){
     questions.
-    find({ 'coursename': requiredcourse.coursename }).
+    find({ 'coursename': coursename }).
     exec(function(err, result){
         if(err) throw err;
         callback(result);
