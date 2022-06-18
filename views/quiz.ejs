@@ -157,7 +157,7 @@
           }
           console.log(selected)
            if(selected.join() == data[active].answers.join() ){
-            marks+=10;
+            marks+=parseInt(data[active].marks);
            }
 
            questions[active].style.display="none"
@@ -180,7 +180,7 @@
           }
           console.log(selected)
            if(selected.join() == data[active].answers.join() ){
-            marks+=10;
+            marks += parseInt(data[active].marks);
            }
           active++;
           questions[active].classList.add("active");
