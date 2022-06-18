@@ -158,7 +158,7 @@ app.get("/addQuestion/:coursename", function (req, res) {
   res.render("addquestion", { coursename: req.params.coursename });
 });
 
-app.listen(7762, function () {
+app.listen(process.env.PORT || 7762, function () {
   console.log("server running on port 7762");
   database.connect();
 });
