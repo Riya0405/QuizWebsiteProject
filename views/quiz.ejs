@@ -50,7 +50,8 @@
       .question.active {
         display: block;
       }
-      .question_heading {
+      .question_heading,
+      .score {
         color: white;
         font-size: 28px;
         font-weight: 600;
@@ -83,6 +84,16 @@
       button:hover {
         background-color: #6057a3;
       }
+      .checkbox {
+        width: 20px;
+        height: 20px;
+      }
+      .score {
+        display: none;
+      }
+      .goHome {
+        display: none;
+      }
     </style>
     <title>Quizz</title>
   </head>
@@ -91,51 +102,89 @@
       <div class="container">
         <div class="heading">Quiz : <%= course%></div>
         <div class="question_container">
+          <div class="score"></div>
+          <a href="/" class="goHome"><button>Go Home</button></a>
           <% for(let i of data) { %>
-          <div class="question">
+          <div class="question" id="id<%=i._id%>">
             <div class="question_heading"><%= i.questionname %></div>
             <div class="question_description"><%= i.questiondescription %></div>
             <div class="options">
               <div class="option 1">
-                <input type="checkbox" name="" id="" /> <%= i.option1 %>
+                <input class="checkbox" type="checkbox" name="" id="" /> <%=
+                i.option1 %>
               </div>
               <div class="option 2">
-                <input type="checkbox" name="" id="" /> <%= i.option2 %>
+                <input class="checkbox" type="checkbox" name="" id="" /> <%=
+                i.option2 %>
               </div>
               <div class="option 3">
-                <input type="checkbox" name="" id="" /> <%= i.option3 %>
+                <input class="checkbox" type="checkbox" name="" id="" /> <%=
+                i.option3 %>
               </div>
               <div class="option 4">
-                <input type="checkbox" name="" id="" /> <%= i.option4 %>
+                <input class="checkbox" type="checkbox" name="" id="" /> <%=
+                i.option4 %>
               </div>
             </div>
           </div>
           <% } %>
-
-          <button class="btn-next">Next</button>
-          <button class="btn-submit">Submit</button>
+          <div class="buttons">
+            <button class="btn-next">Next</button>
+            <button class="btn-submit">Submit</button>
+          </div>
         </div>
       </div>
     </div>
 
     <script>
+      var data= <%- JSON.stringify(data) %>;
       var active = 0;
       var questions = document.querySelectorAll(".question");
-      console.log(questions);
       questions[active].classList.add("active");
-
+      var marks = 0;
       var next = document.querySelector(".btn-next");
       var submit = document.querySelector(".btn-submit");
 
       if (active != questions.length - 1) {
         submit.style.display = "none";
       }
+      submit.addEventListener("click",()=>{
+        var options = document.querySelectorAll("#id" + data[active]._id + " .option input")
+          var selected = [];
+          for(var i = 0;i<4;i++){
+            if(options[i].checked)
+              selected.push(++i);
+          }
+
+           if(selected.join() == data[active].answers.join() ){
+            marks+=10;
+           }
+
+           questions[active].style.display="none"
+           document.querySelector(".buttons").style.display = "none"
+          var score =  document.querySelector(".score")
+          score.style.display = "block"
+          score.innerHTML = "You Scored : " + marks
+          document.querySelector(".goHome").style.display="block"
+            console.log(marks)
+      })
 
       next.addEventListener("click", () => {
         if (active != questions.length - 1) {
           questions[active].classList.remove("active");
+          var options = document.querySelectorAll("#id" + data[active]._id + " .option input")
+          var selected = [];
+          for(var i = 0;i<4;i++){
+            if(options[i].checked)
+              selected.push(++i);
+          }
+
+           if(selected.join() == data[active].answers.join() ){
+            marks+=10;
+           }
           active++;
           questions[active].classList.add("active");
+
         }
         if (active == questions.length - 1) {
           //   next.style.visibility = "hidden";
