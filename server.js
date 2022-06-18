@@ -35,6 +35,14 @@ app.patch("/courses", function (req, res) {
   });
 });
 
+app.get("/courses/:coursename",function(req,res){
+    console.log("trying to get course");
+  database.getcourse(req.params.coursename, function (result) {
+    console.log("got course");
+    res.send(result);
+  });
+})
+
 app.get("/courses/delete/:coursename", function (req, res) {
   console.log("trying to delete course");
   database.deletecourse(req.params.coursename, function () {
@@ -138,6 +146,14 @@ app.get("/teachereditingquiz/:coursename", function (req, res, next) {
 app.get("/addCourse", function (req, res) {
   res.render("addquiz");
 });
+
+app.get("/editcourse/:coursename", function (req, res) {
+    database.getcourse(req.params.coursename, function (result) {
+        console.log("got course");
+        res.render("editcourse",{data: result});
+      });
+});
+
 app.get("/addQuestion/:coursename", function (req, res) {
   res.render("addquestion", { coursename: req.params.coursename });
 });

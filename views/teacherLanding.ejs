@@ -28,13 +28,14 @@
               <a
                 class="button_link"
                 href="/teachereditingquiz/<%=i.coursename%>"
-                ><button>Edit</button></a
+                ><button>Edit quiz</button></a
               >
-
+              
               <a class="button_link" href="/courses/delete/<%=i.coursename%>">
-                <button>Delete</button></a
+                <button>Delete course</button></a
               >
             </div>
+            <button class="editcourse" id="<%=i.coursename %>">edit course details</button>
           </div>
           <% } %>
         </div>
@@ -43,6 +44,6 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="teacherLandingpage.js"></script>
+    <script src="editcourse.js"></script>
   </body>
 </html>

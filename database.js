@@ -34,15 +34,22 @@ function connect() {
 }
 
 function addcourse(course, callback) {
-  var courseInstance = new courses({
-    coursename: course.coursename,
-    coursedescription: course.coursedescription,
-    passingmarks: course.passingmarks,
-  });
-  courseInstance.save(function (err) {
-    if (err) throw err;
-    callback();
-  });
+    getcourse(course.coursename,function(result){
+        if(result){
+            updatecourse(course,callback);
+        }
+        else{
+            var courseInstance = new courses({
+                coursename: course.coursename,
+                coursedescription: course.coursedescription,
+                passingmarks: course.passingmarks,
+              });
+              courseInstance.save(function (err) {
+                if (err) throw err;
+                callback();
+              });
+        }
+    }); 
 }
 
 function updatecourse(course, callback) {
@@ -58,6 +65,13 @@ function deletecourse(coursename, callback) {
     callback();
   });
 }
+
+function getcourse(coursename, callback) {
+    courses.findOne({ coursename: coursename }).exec(function (err,result) {
+      if (err) throw err;
+      callback(result);
+    });
+  }
 
 function getallcourses(callback) {
   courses.find({}).exec(function (err, result) {
@@ -119,4 +133,5 @@ module.exports = {
   updatequestion,
   deletequestion,
   getcoursequestions,
+  getcourse
 };
