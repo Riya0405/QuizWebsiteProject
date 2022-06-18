@@ -67,13 +67,16 @@ app.patch("/courses/questions", function (req, res) {
   });
 });
 
-app.delete("/courses/questions", function (req, res) {
-  console.log("trying to delete question for a course");
-  database.deletequestion(req.body, function () {
-    console.log("deleted question for a course");
-    res.sendStatus(200);
-  });
-});
+app.get(
+  "/courses/:coursename/deletequestions/:questionname",
+  function (req, res) {
+    console.log("trying to delete question for a course");
+    database.deletequestion(req.params.questionname, function () {
+      console.log("deleted question for a course");
+      res.redirect("/teachereditingquiz/" + req.params.coursename);
+    });
+  }
+);
 
 app.get("/courses/:coursename/questions", function (req, res) {
   console.log("trying to get questions for a course");
@@ -117,7 +120,7 @@ app.get("/teachereditingquiz/:coursename", function (req, res, next) {
   console.log(req.params.coursename);
   database.getcoursequestions(req.params.coursename, function (questions) {
     console.log("got questions for the course");
-    res.render("showquiztoteacher", { data: questions });
+    res.render("editquiz", { data: questions });
   });
 });
 

@@ -25,8 +25,12 @@
               PASSING MARKS : <%= i.passingmarks %>
             </div>
             <div class="buttons">
-              <a class="button_link" href=""><button>Edit</button></a>
-              <a class="button_link" href=""><button>Add Question</button></a>
+              <a
+                class="button_link"
+                href="/teachereditingquiz/<%=i.coursename%>"
+                ><button>Edit</button></a
+              >
+
               <a class="button_link" href="/courses/delete/<%=i.coursename%>">
                 <button>Delete</button></a
               >

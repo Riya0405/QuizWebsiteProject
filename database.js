@@ -95,8 +95,8 @@ function updatequestion(question, callback) {
   );
 }
 
-function deletequestion(question, callback) {
-  questions.deleteOne({ questionname: question.questionname }, function (err) {
+function deletequestion(questionname, callback) {
+  questions.deleteOne({ questionname: questionname }, function (err) {
     if (err) throw err;
     callback();
   });
