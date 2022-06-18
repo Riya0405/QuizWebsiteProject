@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="addquiz.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Add Question</title>
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #eff1f5;
+      }
+
+      .main {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container {
+        width: 70%;
+        height: 80%;
+        background-color: white;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        padding: 20px 50px;
+        justify-content: center;
+      }
+      .heading {
+        font-size: 30px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 40px;
+      }
+      .course_container {
+        overflow-y: scroll;
+        padding: 40px 40px;
+        box-sizing: border-box;
+        display: flex;
+        width: 100%;
+        height: 80%;
+        border-radius: 8px;
+        margin-top: 10px;
+        background-color: #de497c;
+      }
+
+      button {
+        margin-top: 20px;
+        padding: 10px 15px;
+        font-size: 16px;
+        outline: none;
+        font-family: inherit;
+        border: none;
+        font-weight: 500;
+        border-radius: 6px;
+        color: #4c4772;
+        background-color: white;
+        margin-bottom: 20px;
+      }
+      .button_link:not(:last-child) {
+        margin-right: 20px;
+      }
+
+      button:hover {
+        background-color: rgb(197, 197, 197);
+      }
+
+      .form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        color: white;
+        font-size: 20px;
+        font-weight: 400;
+        margin-bottom: 10px;
+      }
+      input {
+        margin-bottom: 10px;
+        border: none;
+        outline: none;
+        font-family: inherit;
+        font-size: 18px;
+        padding: 10px 10px;
+        border-radius: 6px;
+      }
+      .spacer {
+        height: 20px;
+      }
+      .checkbox {
+        height: 20px;
+        width: 20px;
+        margin-left: 20px;
+      }
+      span {
+        display: inline-block;
+      }
+      .option_container {
+        display: flex;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="container">
+        <div class="heading">Add Question to <%= coursename%></div>
+        <div class="course_container">
+          <form action="/courses/questions" method="POST" class="form">
+            <label for="questionname">Question Name</label>
+            <input name="questionname" type="text" id="questionname" required />
+            <label for="questiondescription">Question Description</label>
+            <input
+              name="questiondescription"
+              type="text"
+              id="questiondescription"
+              required
+            />
+            <label for="option1">Option 1</label>
+            <div class="option_container">
+              <input name="option1" type="text" id="option1" required />
+              <input class="checkbox" id="c1" type="checkbox" />
+              <span>Is correct</span>
+            </div>
+            <label for="option1">Option 2</label>
+            <div class="option_container">
+              <input name="option2" type="text" id="option2" required />
+              <input class="checkbox" id="c2" type="checkbox" />
+              <span>Is correct</span>
+            </div>
+            <label for="option3">Option 3</label>
+            <div class="option_container">
+              <input name="option3" type="text" id="option3" required />
+              <input class="checkbox" id="c3" type="checkbox" />
+              <span>Is correct</span>
+            </div>
+            <label for="option4">Option 4</label>
+            <div class="option_container">
+              <input name="option4" type="text" id="option4" required />
+              <input class="checkbox" ic="c4" type="checkbox" />
+              <span>Is correct</span>
+            </div>
+            <input
+              name="answers"
+              type="text"
+              id="answers"
+              style="display: none"
+            />
+            <input
+              type="text"
+              name="marks"
+              id="marks"
+              value="10"
+              style="display: none"
+            />
+            <input
+              type="text"
+              name="coursename"
+              value="<%=coursename%>"
+              style="display: none"
+            />
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var ans = [];
+      var inp = document.querySelector("#answers");
+      var options = document.querySelectorAll(".checkbox");
+      options.forEach((option, i) => {
+        option.addEventListener("click", () => {
+          if (option.checked && ans.indexOf(i + 1) == -1) ans.push(i + 1);
+
+          if (!option.checked && ans.indexOf(i + 1) != -1) {
+            ans.splice(ans.indexOf(i + 1), 1);
+          }
+
+          ans.sort();
+          inp.value = ans;
+          console.log(ans);
+        });
+      });
+    </script>
+  </body>
+</html>

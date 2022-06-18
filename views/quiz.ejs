@@ -153,9 +153,9 @@
           var selected = [];
           for(var i = 0;i<4;i++){
             if(options[i].checked)
-              selected.push(++i);
+              selected.push(i+1);
           }
-
+          console.log(selected)
            if(selected.join() == data[active].answers.join() ){
             marks+=10;
            }
@@ -176,9 +176,9 @@
           var selected = [];
           for(var i = 0;i<4;i++){
             if(options[i].checked)
-              selected.push(++i);
+              selected.push(i+1);
           }
-
+          console.log(selected)
            if(selected.join() == data[active].answers.join() ){
             marks+=10;
            }

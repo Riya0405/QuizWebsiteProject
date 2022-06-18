@@ -53,6 +53,13 @@ app.get("/courses", function (req, res) {
 
 app.post("/courses/questions", function (req, res) {
   console.log("trying to add question for a course");
+  var arr = req.body.answers.split(",");
+  const ans = arr.map((str) => {
+    return parseInt(str);
+  });
+
+  req.body.answers = ans;
+
   database.addquestion(req.body, function () {
     console.log("added question for a course");
     res.sendStatus(200);
@@ -110,6 +117,7 @@ app.get("/studenttakingquiz/:coursename", function (req, res, next) {
   console.log(req.params.coursename);
   database.getcoursequestions(req.params.coursename, function (questions) {
     console.log("got questions for the course");
+    console.log(questions);
     res.render("quiz", { data: questions, course: req.params.coursename });
   });
 });
@@ -126,6 +134,9 @@ app.get("/teachereditingquiz/:coursename", function (req, res, next) {
 
 app.get("/addCourse", function (req, res) {
   res.render("addquiz");
+});
+app.get("/addQuestion/:coursename", function (req, res) {
+  res.render("addquestion", { coursename: req.params.coursename });
 });
 
 app.listen(7762, function () {
