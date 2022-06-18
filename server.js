@@ -22,7 +22,8 @@ app.post("/courses", function (req, res) {
   console.log("trying to add course");
   database.addcourse(req.body, function () {
     console.log("added course");
-    res.sendStatus(200);
+    // res.sendStatus(200);
+    res.redirect("/teacherlandingpage");
   });
 });
 
@@ -34,11 +35,11 @@ app.patch("/courses", function (req, res) {
   });
 });
 
-app.delete("/courses", function (req, res) {
+app.get("/courses/delete/:coursename", function (req, res) {
   console.log("trying to delete course");
-  database.deletecourse(req.body, function () {
+  database.deletecourse(req.params.coursename, function () {
     console.log("deleted course");
-    res.sendStatus(200);
+    res.redirect("/teacherlandingpage");
   });
 });
 
@@ -96,7 +97,7 @@ app.get("/teacherlandingpage", function (req, res, next) {
   console.log("trying to get list of courses");
   database.getallcourses(function (courses) {
     console.log("got list of courses");
-    res.render("teacherlandingpage", { data: courses });
+    res.render("teacherlanding", { data: courses });
   });
 });
 
@@ -118,6 +119,10 @@ app.get("/teachereditingquiz/:coursename", function (req, res, next) {
     console.log("got questions for the course");
     res.render("showquiztoteacher", { data: questions });
   });
+});
+
+app.get("/addCourse", function (req, res) {
+  res.render("addquiz");
 });
 
 app.listen(7762, function () {
