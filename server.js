@@ -62,7 +62,7 @@ app.post("/courses/questions", function (req, res) {
 
   database.addquestion(req.body, function () {
     console.log("added question for a course");
-    res.sendStatus(200);
+    res.redirect("/teachereditingquiz/" + req.body.coursename);
   });
 });
 
@@ -128,7 +128,10 @@ app.get("/teachereditingquiz/:coursename", function (req, res, next) {
   console.log(req.params.coursename);
   database.getcoursequestions(req.params.coursename, function (questions) {
     console.log("got questions for the course");
-    res.render("editquiz", { data: questions });
+    res.render("editquiz", {
+      data: questions,
+      coursename: req.params.coursename,
+    });
   });
 });
 

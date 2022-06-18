@@ -81,7 +81,7 @@
   <body>
     <div class="main">
       <div class="container">
-        <div class="heading">Edit Course : <%= data[0].coursename %></div>
+        <div class="heading">Edit Course : <%= coursename %></div>
         <div class="course_container">
           <% for(let i of data) { %>
           <div class="question">
@@ -94,7 +94,7 @@
             </div>
           </div>
           <% } %>
-          <a href="/addQuestion/<%=data[0].coursename%>">
+          <a href="/addQuestion/<%=coursename%>">
             <button>Add question</button>
           </a>
         </div>
