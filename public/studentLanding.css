@@ -4,15 +4,15 @@ body{
 }
 
 .main{
-    height: 100vh;
-    width: 100vw;
+    height: 95vh;
+    width: 99vw;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .container{
-    width: 70%;
+    width: 90%;
     height: 80%;
     background-color: white;
     border-radius: 10px;
@@ -37,7 +37,7 @@ body{
 .course{
     background-color: #aa89f1;
     height: 300px;
-    width: 100%;
+    width: 25%;
     max-width: 400px;
     border-radius: 8px;
     display: flex;
@@ -60,13 +60,12 @@ body{
     color: white;
     font-size: 22px;
     font-weight: 600;
-    text-transform: uppercase;
     margin-bottom: 10px;
-    
+    text-align: center;
 }
 
 .course_description{
-    color: white;
+    color: #3d3957;
     font-size: 18px;
     font-weight: 400;
     margin-bottom: 10px;
