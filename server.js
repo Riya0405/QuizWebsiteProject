@@ -115,7 +115,7 @@ app.get("/teacherlandingpage", function (req, res, next) {
   console.log("trying to get list of courses");
   database.getallcourses(function (courses) {
     console.log("got list of courses");
-    res.render("teacherlanding", { data: courses });
+    res.render("teacherLanding", { data: courses });
   });
 });
 
